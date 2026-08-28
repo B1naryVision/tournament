@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apex Circuit — Season 5 Championship</title>
+<meta name="description" content="Live single-elimination bracket, match replays and open registration for the Apex Circuit championship series.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127942;</text></svg>">
+<style>
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root{
+  --bg:#0b0d13;
+  --bg-soft:#11141d;
+  --surface:#161a25;
+  --surface-2:#1d2231;
+  --line:#272d3d;
+  --line-soft:#1f2433;
+  --text:#e9ecf5;
+  --muted:#8e97ad;
+  --faint:#5e6679;
+  --accent:#6c8cff;
+  --accent-2:#42e2b8;
+  --gold:#f5c451;
+  --danger:#ff6b6b;
+  --shadow:0 10px 30px -12px rgba(0,0,0,.75);
+  --radius:14px;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-display:"Space Grotesk","Inter",system-ui,sans-serif;
+  --maxw:1200px;
+}
+:root[data-theme="light"]{
+  --bg:#f4f6fb;
+  --bg-soft:#ffffff;
+  --surface:#ffffff;
+  --surface-2:#eef1f8;
+  --line:#dde2ee;
+  --line-soft:#e7eaf3;
+  --text:#161a25;
+  --muted:#5b6479;
+  --faint:#8d95a8;
+  --accent:#3b5bdb;
+  --accent-2:#0ca678;
+  --gold:#b8860b;
+  --shadow:0 10px 30px -14px rgba(20,28,60,.28);
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;margin:0 0 .4em}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.section{padding:72px 0}
+.section__head{margin-bottom:28px}
+.eyebrow{
+  font-family:var(--font-display);font-size:.75rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent-2);margin:0 0 8px;
+}
+.section__head h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}
+.section__head p{color:var(--muted);margin:0;max-width:62ch}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ============================================================
+   3. NAV
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--bg) 86%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft);
+}
+.nav__inner{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;color:var(--text)}
+.brand:hover{text-decoration:none}
+.brand__mark{
+  width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0d13;
+}
+.nav__links{display:flex;gap:6px;margin-left:auto;align-items:center}
+.nav__links a:not(.btn){
+  color:var(--muted);font-size:.92rem;font-weight:500;
+  padding:8px 12px;border-radius:9px;
+}
+.nav__links a:not(.btn):hover{color:var(--text);background:var(--surface);text-decoration:none}
+.nav__links a.btn:hover{text-decoration:none}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 18px;border-radius:11px;border:1px solid transparent;
+  font-weight:600;font-size:.92rem;cursor:pointer;
+  transition:transform .12s ease,filter .15s ease,background .15s ease,border-color .15s ease;
+}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn--primary{background:linear-gradient(135deg,var(--accent),#8a7dff);color:#fff}
+.btn--primary:hover{filter:brightness(1.08)}
+.btn--ghost{background:var(--surface);border-color:var(--line);color:var(--text)}
+.btn--ghost:hover{border-color:var(--accent);color:var(--text)}
+.btn--sm{padding:7px 13px;font-size:.82rem;border-radius:9px}
+.icon-btn{
+  width:38px;height:38px;display:grid;place-items:center;border-radius:10px;
+  background:var(--surface);border:1px solid var(--line);cursor:pointer;
+}
+.icon-btn:hover{border-color:var(--accent)}
+@media(max-width:760px){
+  .nav__links a[data-optional]{display:none}
+}
+@media(max-width:560px){
+  .nav__links a:not(.btn){display:none}
+  .nav__links{gap:8px}
+}
+
+/* ============================================================
+   4. HERO
+   ============================================================ */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
+.hero::before{
+  content:"";position:absolute;inset:-40% -10% auto -10%;height:520px;
+  background:
+    radial-gradient(50% 60% at 20% 40%,rgba(108,140,255,.28),transparent 70%),
+    radial-gradient(45% 55% at 80% 30%,rgba(66,226,184,.18),transparent 70%);
+  filter:blur(10px);pointer-events:none;
+}
+.hero__inner{position:relative;padding:76px 0 64px}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--line);
+  font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent-2) 22%,transparent)}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);margin:18px 0 12px;letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:var(--muted);font-size:1.08rem;max-width:56ch;margin:0 0 26px}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px}
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:44px;
+}
+.stat{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;
+}
+.stat__k{font-family:var(--font-display);font-size:1.7rem;font-weight:700;line-height:1}
+.stat__l{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-top:7px}
+
+/* ============================================================
+   5. BRACKET
+   ============================================================ */
+.bracket-toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:18px;
+}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:11px;height:11px;border-radius:3px;background:var(--line)}
+.swatch--win{background:var(--accent-2)}
+.swatch--live{background:var(--danger)}
+.swatch--video{background:var(--accent)}
+
+.bracket-scroll{
+  overflow-x:auto;overflow-y:hidden;padding:6px 4px 18px;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+  -webkit-overflow-scrolling:touch;
+}
+.bracket-scroll::-webkit-scrollbar{height:10px}
+.bracket-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.bracket-canvas{position:relative;min-width:max-content}
+.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.links path{fill:none;stroke:var(--line);stroke-width:2}
+.links path.is-champ{stroke:var(--gold);stroke-width:2.5;opacity:.85}
+
+.rounds{display:flex;gap:34px;position:relative;z-index:1}
+.round{display:flex;flex-direction:column;flex:0 0 258px;width:258px}
+.round__title{
+  font-family:var(--font-display);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);text-align:center;padding-bottom:14px;margin-bottom:8px;
+  border-bottom:1px solid var(--line-soft);
+}
+.round__body{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:16px}
+
+.match{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);cursor:default;
+  transition:border-color .16s ease,transform .16s ease,box-shadow .16s ease;
+  position:relative;
+}
+.match.is-playable{cursor:pointer}
+.match.is-playable:hover,.match.is-playable:focus-visible{
+  border-color:var(--accent);transform:translateY(-2px);
+}
+.match__meta{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:8px 12px;background:var(--surface-2);border-bottom:1px solid var(--line-soft);
+  font-size:.71rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;
+  background:var(--line-soft);color:var(--muted);font-size:.66rem;
+}
+.pill--live{background:color-mix(in srgb,var(--danger) 18%,transparent);color:var(--danger)}
+.pill--live .dot{background:var(--danger);box-shadow:none;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.pill--done{background:color-mix(in srgb,var(--accent-2) 15%,transparent);color:var(--accent-2)}
+
+.team{
+  display:flex;align-items:center;gap:10px;padding:11px 12px;
+  border-bottom:1px solid var(--line-soft);position:relative;
+}
+.team:last-of-type{border-bottom:0}
+.team.is-winner{background:color-mix(in srgb,var(--accent-2) 8%,transparent)}
+.team.is-winner::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent-2);
+}
+.team.is-loser{opacity:.55}
+.seed{
+  flex:0 0 auto;min-width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
+  background:var(--surface-2);color:var(--faint);font-size:.68rem;font-weight:700;padding:0 5px;
+}
+.team.is-winner .seed{background:color-mix(in srgb,var(--accent-2) 20%,transparent);color:var(--accent-2)}
+.team__name{
+  flex:1;min-width:0;font-size:.92rem;font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.team.is-winner .team__name{font-weight:700}
+.team__name.is-tbd{color:var(--faint);font-style:italic;font-weight:400}
+.team__score{
+  font-family:var(--font-display);font-weight:700;font-size:1rem;
+  min-width:22px;text-align:right;color:var(--muted);
+}
+.team.is-winner .team__score{color:var(--accent-2)}
+
+.match__foot{
+  display:flex;align-items:center;gap:8px;padding:9px 12px;
+  border-top:1px solid var(--line-soft);background:color-mix(in srgb,var(--surface-2) 60%,transparent);
+  font-size:.78rem;color:var(--muted);
+}
+.match__foot .watch{
+  margin-left:auto;display:inline-flex;align-items:center;gap:6px;
+  background:transparent;border:1px solid var(--line);color:var(--accent);
+  padding:5px 10px;border-radius:8px;font-size:.76rem;font-weight:600;cursor:pointer;
+}
+.match.is-playable:hover .watch{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* Champion column */
+.champ-card{
+  align-self:center;margin:auto 0;text-align:center;padding:26px 22px;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--gold) 14%,var(--surface)),var(--surface));
+  border:1px solid color-mix(in srgb,var(--gold) 40%,var(--line));
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.champ-card .trophy{display:flex;justify-content:center;color:var(--gold);line-height:0}
+.champ-card .trophy svg{width:46px;height:46px}
+.champ-card .label{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin:10px 0 4px;
+}
+.champ-card .name{font-family:var(--font-display);font-size:1.25rem;font-weight:700}
+.champ-card .sub{color:var(--muted);font-size:.82rem;margin-top:4px}
+
+.scroll-hint{display:none;font-size:.8rem;color:var(--faint);margin-top:-6px}
+@media(max-width:900px){.scroll-hint{display:block}}
+
+/* ============================================================
+   6. MODAL / VIDEO
+   ============================================================ */
+dialog#videoModal{
+  border:0;padding:0;background:transparent;color:var(--text);
+  width:min(940px,94vw);max-width:none;
+}
+dialog#videoModal::backdrop{background:rgba(5,7,12,.82);backdrop-filter:blur(4px)}
+.modal{
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;box-shadow:0 30px 80px -30px #000;
+}
+.modal__head{display:flex;align-items:flex-start;gap:14px;padding:18px 20px}
+.modal__head h3{margin:0;font-size:1.05rem}
+.modal__head .meta{color:var(--muted);font-size:.82rem;margin-top:3px}
+.modal__close{
+  margin-left:auto;flex:0 0 auto;width:34px;height:34px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--line);cursor:pointer;font-size:1rem;line-height:1;
+}
+.modal__close:hover{border-color:var(--danger);color:var(--danger)}
+.video-frame{position:relative;aspect-ratio:16/9;background:#000;width:100%}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-fallback{
+  position:absolute;inset:0;display:grid;place-content:center;gap:14px;justify-items:center;
+  text-align:center;padding:24px;background:var(--surface-2);
+}
+.modal__score{
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:16px 20px;border-top:1px solid var(--line-soft);flex-wrap:wrap;
+}
+.modal__team{display:flex;align-items:center;gap:9px;font-weight:600}
+.modal__team.win{color:var(--accent-2)}
+.modal__team .s{font-family:var(--font-display);font-size:1.35rem}
+.modal__vs{color:var(--faint);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+.modal__foot{padding:0 20px 18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* ============================================================
+   7. SIGNUP
+   ============================================================ */
+.signup-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:26px;align-items:start}
+@media(max-width:860px){.signup-grid{grid-template-columns:1fr}}
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:18px;padding:26px;box-shadow:var(--shadow);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:620px){.form-grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px}
+.field--full{grid-column:1/-1}
+.field label{font-size:.82rem;font-weight:600;color:var(--muted)}
+.field label .req{color:var(--danger)}
+.field input,.field select,.field textarea{
+  width:100%;padding:11px 13px;border-radius:11px;
+  background:var(--bg-soft);border:1px solid var(--line);color:var(--text);
+  font:inherit;font-size:.93rem;transition:border-color .15s ease,box-shadow .15s ease;
+}
+.field textarea{resize:vertical;min-height:88px}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:0;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent);
+}
+.field.has-error input,.field.has-error select{border-color:var(--danger)}
+.err{color:var(--danger);font-size:.76rem;margin:0}
+.err:not(:empty){margin-top:4px}
+.check{
+  grid-column:1/-1;display:flex;gap:11px;align-items:flex-start;
+  font-size:.86rem;color:var(--muted);
+}
+.check input{width:17px;height:17px;margin-top:2px;accent-color:var(--accent);flex:0 0 auto}
+.form-actions{grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.form-note{font-size:.78rem;color:var(--faint)}
+
+.info-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.info-list li{display:flex;gap:12px;align-items:flex-start}
+.info-list .ico{
+  flex:0 0 auto;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--accent);
+}
+.info-list .ico svg{width:17px;height:17px}
+.info-list b{display:block;font-size:.9rem}
+.info-list span{color:var(--muted);font-size:.83rem}
+
+.roster{margin-top:18px}
+.roster__head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.roster__head h4{margin:0;font-size:.88rem;font-family:var(--font-display)}
+.roster__count{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:999px;
+  padding:1px 9px;font-size:.74rem;color:var(--muted);
+}
+.roster ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;max-height:260px;overflow:auto}
+.roster li{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  background:var(--bg-soft);border:1px solid var(--line-soft);border-radius:11px;font-size:.86rem;
+}
+.roster li .t{font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.roster li .r{color:var(--faint);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em}
+.roster li button{
+  background:transparent;border:0;color:var(--faint);cursor:pointer;padding:2px 4px;border-radius:6px;
+}
+.roster li button:hover{color:var(--danger)}
+.roster .empty{color:var(--faint);font-size:.84rem;padding:14px;text-align:center;
+  border:1px dashed var(--line);border-radius:11px}
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
+  opacity:0;pointer-events:none;visibility:hidden;
+  background:var(--surface);border:1px solid var(--accent-2);color:var(--text);
+  padding:13px 20px;border-radius:13px;box-shadow:var(--shadow);z-index:200;
+  display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:500;
+  transition:transform .32s cubic-bezier(.2,.9,.3,1.2),opacity .24s ease,visibility .24s;
+  max-width:92vw;
+}
+.toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto;visibility:visible}
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+.footer{border-top:1px solid var(--line-soft);padding:34px 0;margin-top:20px}
+.footer__inner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:var(--muted);font-size:.85rem}
+.footer__inner .sp{margin-left:auto}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top"><span class="brand__mark"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h5v14H3"/><path d="M8 12h5"/><path d="M13 8h5v8h-5"/><path d="M18 12h3"/></svg></span> Apex&nbsp;Circuit</a>
+    <nav class="nav__links">
+      <a href="#bracket">Bracket</a>
+      <a href="#signup">Register</a>
+      <a href="#rules" data-optional>Format</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle colour theme" title="Toggle colour theme">&#9790;</button>
+      <a class="btn btn--primary btn--sm" href="#signup">Sign up</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<main id="top">
+<section class="hero">
+  <div class="wrap hero__inner">
+    <span class="badge"><span class="dot"></span> Season 5 &middot; Grand Final complete</span>
+    <h1>Apex Circuit <span>Championship</span></h1>
+    <p class="lead">Eight qualified squads. One single-elimination bracket. Every match is recorded &mdash;
+      click any completed fixture to watch the full replay, then lock your roster in for Season&nbsp;6.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#bracket">&#9654;&nbsp; View bracket &amp; replays</a>
+      <a class="btn btn--ghost" href="#signup">Register a team</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat__k" id="statTeams">8</div><div class="stat__l">Teams</div></div>
+      <div class="stat"><div class="stat__k" id="statMatches">7</div><div class="stat__l">Matches</div></div>
+      <div class="stat"><div class="stat__k">$25,000</div><div class="stat__l">Prize pool</div></div>
+      <div class="stat"><div class="stat__k" id="statReplays">7</div><div class="stat__l">Replays online</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BRACKET ============================ -->
+<section class="section" id="bracket">
+  <div class="wrap">
+    <div class="section__head">
+      <p class="eyebrow">Single elimination</p>
+      <h2>Championship bracket</h2>
+      <p>Winners advance to the right. Any match with a <strong>Watch replay</strong> button opens the full VOD in place &mdash; no need to leave the page.</p>
+    </div>
+
+    <div class="bracket-toolbar">
+      <button class="btn btn--ghost btn--sm" id="watchFinal" type="button">&#9654;&nbsp; Watch the Grand Final</button>
+      <div class="legend">
+        <span><i class="swatch swatch--win"></i> Winner</span>
+        <span><i class="swatch swatch--video"></i> Replay available</span>
+        <span><i class="swatch swatch--live"></i> Live now</span>
+        <span><i class="swatch"></i> Not played</span>
+      </div>
+    </div>
+    <p class="scroll-hint">&#8592; Swipe sideways to see every round &#8594;</p>
+
+    <div class="bracket-scroll" id="bracketScroll">
+      <div class="bracket-canvas" id="bracketCanvas">
+        <svg class="links" id="bracketLinks" aria-hidden="true"></svg>
+        <div class="rounds" id="rounds"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SIGNUP ============================ -->
+<section class="section" id="signup" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
+  <div class="wrap">
+    <div class="section__head">
+      <p class="eyebrow">Season 6 &middot; Open qualifier</p>
+      <h2>Register your team</h2>
+      <p>Registration closes <strong>Friday 18 September, 23:59 CET</strong>. Sixteen slots, first come first served, with four seeded invites reserved for Season&nbsp;5 semi-finalists.</p>
+    </div>
+
+    <div class="signup-grid">
+      <!-- FORM -->
+      <div class="card">
+        <form id="signupForm" novalidate>
+          <div class="form-grid">
+            <div class="field field--full">
+              <label for="team">Team / organisation name <span class="req">*</span></label>
+              <input id="team" name="team" type="text" autocomplete="organization" placeholder="e.g. Crimson Vanguard" required>
+              <p class="err" data-err-for="team"></p>
+            </div>
+
+            <div class="field">
+              <label for="captain">Captain in-game name <span class="req">*</span></label>
+              <input id="captain" name="captain" type="text" autocomplete="nickname" placeholder="e.g. Halcyon" required>
+              <p class="err" data-err-for="captain"></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Contact e-mail <span class="req">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="captain@team.gg" required>
+              <p class="err" data-err-for="email"></p>
+            </div>
+
+            <div class="field">
+              <label for="region">Region <span class="req">*</span></label>
+              <select id="region" name="region" required>
+                <option value="">Select a region&hellip;</option>
+                <option>EU West</option>
+                <option>EU Nordic</option>
+                <option>North America</option>
+                <option>South America</option>
+                <option>APAC</option>
+                <option>Oceania</option>
+              </select>
+              <p class="err" data-err-for="region"></p>
+            </div>
+
+            <div class="field">
+              <label for="roster">Roster size <span class="req">*</span></label>
+              <select id="roster" name="roster" required>
+                <option value="">Players on the roster&hellip;</option>
+                <option value="5">5 (starters only)</option>
+                <option value="6">6 (one substitute)</option>
+                <option value="7">7 (two substitutes)</option>
+              </select>
+              <p class="err" data-err-for="roster"></p>
+            </div>
+
+            <div class="field field--full">
+              <label for="discord">Discord handle <span style="font-weight:400;text-transform:none">(optional)</span></label>
+              <input id="discord" name="discord" type="text" placeholder="captain#0001">
+              <p class="err" data-err-for="discord"></p>
+            </div>
+
+            <div class="field field--full">
+              <label for="notes">Anything we should know? <span style="font-weight:400;text-transform:none">(optional)</span></label>
+              <textarea id="notes" name="notes" placeholder="Preferred match nights, streaming setup, roster notes&hellip;"></textarea>
+            </div>
+
+            <label class="check field--full">
+              <input type="checkbox" id="agree" name="agree" required>
+              <span>I have read the <a href="#rules">competition format &amp; ruleset</a> and confirm every listed player meets the eligibility requirements. <span class="req">*</span></span>
+            </label>
+            <p class="err" data-err-for="agree" style="grid-column:1/-1;margin-top:-10px"></p>
+
+            <div class="form-actions">
+              <button class="btn btn--primary" type="submit">Submit registration</button>
+              <button class="btn btn--ghost" type="reset">Clear form</button>
+              <span class="form-note">Demo build &mdash; entries are stored in your browser only.</span>
+            </div>
+          </div>
+        </form>
+
+        <div class="roster">
+          <div class="roster__head">
+            <h4>Registered so far</h4>
+            <span class="roster__count" id="rosterCount">0</span>
+          </div>
+          <ul id="rosterList"></ul>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="card" id="rules">
+        <h3 style="font-size:1.05rem">Format &amp; key dates</h3>
+        <ul class="info-list" style="margin-top:16px">
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div><b>Registration closes</b><span>Fri 18 Sep, 23:59 CET</span></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></span><div><b>Open qualifiers</b><span>Sat 26 &ndash; Sun 27 Sep &middot; Bo3, single elimination</span></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3h9v5.2a4.5 4.5 0 0 1-9 0V3Z"/><path d="M7.5 4.6H5a2.6 2.6 0 0 0 0 5.2h1.4"/><path d="M16.5 4.6H19a2.6 2.6 0 0 1 0 5.2h-1.4"/><path d="M12 12.7v3"/><path d="M10.1 20.4l.5-4.7h2.8l.5 4.7"/><path d="M8.3 20.4h7.4"/></svg></span><div><b>Main event</b><span>Sat 10 Oct &middot; Bo5 from the semi-finals, Bo7 final</span></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.5a6.4 6.4 0 0 1 12.4 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 5.9"/><path d="M17.6 14.2a6.4 6.4 0 0 1 3.6 5.3"/></svg></span><div><b>Roster rules</b><span>5 starters, up to 2 substitutes. Substitutions allowed between matches only.</span></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8 3.5l4 3.5 4-3.5"/><path d="M10.3 11.6l4.4 2.4-4.4 2.4z"/></svg></span><div><b>Broadcast</b><span>Every main-event match is recorded and published to the bracket within 24 hours.</span></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.6 9.2A2.9 2.9 0 0 0 12 7.8c-1.6 0-2.6.9-2.6 2s1 1.8 2.6 2.1 2.6.9 2.6 2-1 2-2.6 2a2.9 2.9 0 0 1-2.6-1.4"/><path d="M12 6.3v11.4"/></svg></span><div><b>Prize pool</b><span>$25,000 &mdash; 50 / 25 / 15 / 10 split across the top four.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span>&copy; <span id="year"></span> Apex Circuit &mdash; demo tournament site.</span>
+    <span class="sp"></span>
+    <a href="#bracket">Bracket</a>
+    <a href="#signup">Register</a>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<!-- ============================ VIDEO MODAL ============================ -->
+<dialog id="videoModal" aria-labelledby="videoTitle">
+  <div class="modal">
+    <div class="modal__head">
+      <div>
+        <h3 id="videoTitle">Match replay</h3>
+        <p class="meta" id="videoMeta"></p>
+      </div>
+      <button class="modal__close" id="videoClose" type="button" aria-label="Close replay">&#10005;</button>
+    </div>
+    <div class="video-frame" id="videoFrame"></div>
+    <div class="modal__score" id="videoScore"></div>
+    <div class="modal__foot">
+      <a class="btn btn--ghost btn--sm" id="videoExternal" href="#" target="_blank" rel="noopener noreferrer">Open on YouTube &#8599;</a>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ==================================================================
+   TOURNAMENT DATA  —  this is the only block you need to edit.
+   ------------------------------------------------------------------
+   status : "completed" | "live" | "scheduled"
+   winner : 0 (top team) | 1 (bottom team) | null
+   video  : any YouTube URL (watch / youtu.be / shorts / embed),
+            any other URL (opens as a link), or "" for none.
+   feeds  : { match: "<id of next match>", slot: 0|1 }
+   ================================================================== */
+const TOURNAMENT = {
+  name: "Apex Circuit — Season 5 Championship",
+  rounds: [
+    {
+      id: "qf",
+      name: "Quarterfinals",
+      matches: [
+        {
+          id: "QF1", label: "QF1", date: "May 3", format: "Bo5", status: "completed", winner: 0,
+          teams: [ {name:"Crimson Vanguard", seed:1, score:3}, {name:"Neon Drift", seed:8, score:1} ],
+          video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          feeds: { match:"SF1", slot:0 }
+        },
+        {
+          id: "QF2", label: "QF2", date: "May 3", format: "Bo5", status: "completed", winner: 1,
+          teams: [ {name:"Iron Meridian", seed:4, score:2}, {name:"Static Halo", seed:5, score:3} ],
+          video: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          feeds: { match:"SF1", slot:1 }
+        },
+        {
+          id: "QF3", label: "QF3", date: "May 4", format: "Bo5", status: "completed", winner: 0,
+          teams: [ {name:"Obsidian Wolves", seed:3, score:3}, {name:"Velvet Circuit", seed:6, score:0} ],
+          video: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+          feeds: { match:"SF2", slot:0 }
+        },
+        {
+          id: "QF4", label: "QF4", date: "May 4", format: "Bo5", status: "completed", winner: 0,
+          teams: [ {name:"Solar Kestrels", seed:2, score:3}, {name:"Midnight Cartel", seed:7, score:2} ],
+          video: "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+          feeds: { match:"SF2", slot:1 }
+        }
+      ]
+    },
+    {
+      id: "sf",
+      name: "Semifinals",
+      matches: [
+        {
+          id: "SF1", label: "SF1", date: "May 10", format: "Bo5", status: "completed", winner: 0,
+          teams: [ {name:"Crimson Vanguard", seed:1, score:3}, {name:"Static Halo", seed:5, score:2} ],
+          video: "https://www.youtube.com/watch?v=9bZkp7q19f0",
+          feeds: { match:"F1", slot:0 }
+        },
+        {
+          id: "SF2", label: "SF2", date: "May 10", format: "Bo5", status: "completed", winner: 1,
+          teams: [ {name:"Obsidian Wolves", seed:3, score:1}, {name:"Solar Kestrels", seed:2, score:3} ],
+          video: "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+          feeds: { match:"F1", slot:1 }
+        }
+      ]
+    },
+    {
+      id: "f",
+      name: "Grand Final",
+      matches: [
+        {
+          id: "F1", label: "Grand Final", date: "May 17", format: "Bo7", status: "completed", winner: 0,
+          teams: [ {name:"Crimson Vanguard", seed:1, score:4}, {name:"Solar Kestrels", seed:2, score:2} ],
+          video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          feeds: null
+        }
+      ]
+    }
+  ]
+};
+
+/* ==================================================================
+   HELPERS
+   ================================================================== */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const allMatches = () => TOURNAMENT.rounds.flatMap(r => r.matches);
+const matchById = id => allMatches().find(m => m.id === id);
+
+/** Turn any YouTube URL into an embeddable one. Returns null if not YouTube. */
+function toEmbedUrl(url){
+  if(!url) return null;
+  let id = null;
+  try{
+    const u = new URL(url, location.href);
+    const host = u.hostname.replace(/^www\./, "");
+    if(host === "youtu.be")                       id = u.pathname.slice(1);
+    else if(host.endsWith("youtube.com")){
+      if(u.searchParams.get("v"))                 id = u.searchParams.get("v");
+      else if(u.pathname.startsWith("/embed/"))   id = u.pathname.split("/")[2];
+      else if(u.pathname.startsWith("/shorts/"))  id = u.pathname.split("/")[2];
+      else if(u.pathname.startsWith("/live/"))    id = u.pathname.split("/")[2];
+    }
+  }catch(e){ return null; }
+  if(!id || !/^[\w-]{6,20}$/.test(id)) return null;
+  return "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1";
+}
+
+const hasVideo   = m => !!(m.video && m.video.trim());
+const isPlayable = m => m.status !== "scheduled" && hasVideo(m);
+const winnerOf   = m => (m.status === "completed" && m.winner !== null && m.winner !== undefined)
+                        ? m.teams[m.winner] : null;
+
+/* ==================================================================
+   BRACKET RENDERING
+   ================================================================== */
+function statusPill(m){
+  if(m.status === "live")      return '<span class="pill pill--live"><span class="dot"></span>Live</span>';
+  if(m.status === "completed") return '<span class="pill pill--done">Final</span>';
+  return '<span class="pill">' + (m.date || "TBD") + '</span>';
+}
+
+function teamRow(m, i){
+  const t   = m.teams[i] || {};
+  const nm  = (t.name || "").trim();
+  const done = m.status === "completed" && m.winner !== null && m.winner !== undefined;
+  const cls = ["team"];
+  if(done && m.winner === i) cls.push("is-winner");
+  if(done && m.winner !== i) cls.push("is-loser");
+  const score = (t.score === null || t.score === undefined || t.score === "") ? "&ndash;" : t.score;
+  return '<div class="' + cls.join(" ") + '">' +
+      '<span class="seed">' + (t.seed ? t.seed : "&ndash;") + '</span>' +
+      '<span class="team__name' + (nm ? "" : " is-tbd") + '">' + (nm || "To be decided") + '</span>' +
+      '<span class="team__score">' + score + '</span>' +
+    '</div>';
+}
+
+function matchCard(m){
+  const playable = isPlayable(m);
+  const el = document.createElement("article");
+  el.className = "match" + (playable ? " is-playable" : "");
+  el.id = "match-" + m.id;
+  el.dataset.match = m.id;
+  if(playable){
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label",
+      "Watch replay: " + m.teams[0].name + " versus " + m.teams[1].name);
+  }
+  const foot = playable
+    ? '<div class="match__foot"><span>' + (m.format || "") + '</span>' +
+      '<button class="watch" type="button" tabindex="-1">&#9654; Watch replay</button></div>'
+    : (m.status === "scheduled"
+        ? '<div class="match__foot"><span>' + (m.format || "") + '</span>' +
+          '<span style="margin-left:auto;color:var(--faint)">Not played yet</span></div>'
+        : '<div class="match__foot"><span>' + (m.format || "") + '</span>' +
+          '<span style="margin-left:auto;color:var(--faint)">Replay coming soon</span></div>');
+
+  el.innerHTML =
+    '<header class="match__meta"><span>' + m.label + '</span>' + statusPill(m) + '</header>' +
+    teamRow(m, 0) + teamRow(m, 1) + foot;
+
+  if(playable){
+    el.addEventListener("click", () => openVideo(m.id));
+    el.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); openVideo(m.id); }
+    });
+  }
+  return el;
+}
+
+function renderBracket(){
+  const host = $("#rounds");
+  host.innerHTML = "";
+
+  TOURNAMENT.rounds.forEach(round => {
+    const col = document.createElement("div");
+    col.className = "round";
+    col.dataset.round = round.id;
+    const body = document.createElement("div");
+    body.className = "round__body";
+    round.matches.forEach(m => body.appendChild(matchCard(m)));
+    col.innerHTML = '<div class="round__title">' + round.name + "</div>";
+    col.appendChild(body);
+    host.appendChild(col);
+  });
+
+  // Champion column
+  const final   = TOURNAMENT.rounds[TOURNAMENT.rounds.length - 1].matches[0];
+  const champ   = winnerOf(final);
+  const col     = document.createElement("div");
+  col.className = "round";
+  col.dataset.round = "champion";
+  col.innerHTML =
+    '<div class="round__title">Champion</div>' +
+    '<div class="round__body" style="justify-content:center">' +
+      '<div class="champ-card" id="champCard">' +
+        '<div class="trophy">' + (champ ? TROPHY_SVG : PENDING_SVG) + '</div>' +
+        '<div class="label">' + (champ ? "Season 5 champion" : "Undecided") + '</div>' +
+        '<div class="name">' + (champ ? champ.name : "Awaiting the final") + '</div>' +
+        '<div class="sub">' + (champ
+            ? final.teams[0].score + " &ndash; " + final.teams[1].score + " &middot; " + final.date
+            : "Winner of the Grand Final") + '</div>' +
+      '</div>' +
+    '</div>';
+  host.appendChild(col);
+
+  updateStats();
+  requestAnimationFrame(drawLinks);
+}
+
+const TROPHY_SVG =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M7.5 3h9v5.2a4.5 4.5 0 0 1-9 0V3Z"/>' +
+    '<path d="M7.5 4.6H5a2.6 2.6 0 0 0 0 5.2h1.4"/>' +
+    '<path d="M16.5 4.6H19a2.6 2.6 0 0 1 0 5.2h-1.4"/>' +
+    '<path d="M12 12.7v3"/>' +
+    '<path d="M10.1 20.4l.5-4.7h2.8l.5 4.7"/>' +
+    '<path d="M8.3 20.4h7.4"/>' +
+  '</svg>';
+const PENDING_SVG =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 2"/>' +
+  '</svg>';
+
+/* ---------- SVG connector lines between rounds ---------- */
+function elbow(x1, y1, x2, y2){
+  const mx = x1 + (x2 - x1) / 2;
+  const dy = y2 - y1;
+  if(Math.abs(dy) < 1) return "M" + x1 + "," + y1 + " L" + x2 + "," + y2;
+  const s = Math.sign(dy);
+  const r = Math.min(14, Math.abs(dy) / 2, Math.abs(x2 - x1) / 2);
+  return "M" + x1 + "," + y1 +
+    " L" + (mx - r) + "," + y1 +
+    " Q" + mx + "," + y1 + " " + mx + "," + (y1 + s * r) +
+    " L" + mx + "," + (y2 - s * r) +
+    " Q" + mx + "," + y2 + " " + (mx + r) + "," + y2 +
+    " L" + x2 + "," + y2;
+}
+
+function drawLinks(){
+  const canvas = $("#bracketCanvas");
+  const svg    = $("#bracketLinks");
+  if(!canvas || !svg) return;
+
+  const box = canvas.getBoundingClientRect();
+  svg.setAttribute("viewBox", "0 0 " + canvas.offsetWidth + " " + canvas.offsetHeight);
+  svg.setAttribute("width",  canvas.offsetWidth);
+  svg.setAttribute("height", canvas.offsetHeight);
+  svg.innerHTML = "";
+
+  const final = TOURNAMENT.rounds[TOURNAMENT.rounds.length - 1].matches[0];
+  const champName = winnerOf(final) ? winnerOf(final).name : null;
+  const ns = "http://www.w3.org/2000/svg";
+
+  const connect = (fromEl, toEl, champPath) => {
+    if(!fromEl || !toEl) return;
+    const a = fromEl.getBoundingClientRect();
+    const b = toEl.getBoundingClientRect();
+    const p = document.createElementNS(ns, "path");
+    p.setAttribute("d", elbow(
+      a.right - box.left, a.top - box.top + a.height / 2,
+      b.left  - box.left, b.top - box.top + b.height / 2
+    ));
+    if(champPath) p.setAttribute("class", "is-champ");
+    svg.appendChild(p);
+  };
+
+  allMatches().forEach(m => {
+    if(!m.feeds) return;
+    const w = winnerOf(m);
+    connect($("#match-" + m.id), $("#match-" + m.feeds.match),
+            !!(champName && w && w.name === champName));
+  });
+
+  // final -> champion card
+  const champCard = $("#champCard");
+  if(champCard) connect($("#match-" + final.id), champCard, !!champName);
+}
+
+function updateStats(){
+  const ms = allMatches();
+  const teams = new Set();
+  TOURNAMENT.rounds[0].matches.forEach(m => m.teams.forEach(t => t.name && teams.add(t.name)));
+  $("#statTeams").textContent   = teams.size;
+  $("#statMatches").textContent = ms.length;
+  $("#statReplays").textContent = ms.filter(isPlayable).length;
+}
+
+/* ==================================================================
+   VIDEO MODAL
+   ================================================================== */
+const modal = $("#videoModal");
+
+function openVideo(id){
+  const m = matchById(id);
+  if(!m || !hasVideo(m)) return;
+
+  $("#videoTitle").textContent = m.teams[0].name + "  vs  " + m.teams[1].name;
+  $("#videoMeta").textContent  =
+    [TOURNAMENT.name, m.label, m.format, m.date].filter(Boolean).join("  •  ");
+
+  const embed = toEmbedUrl(m.video);
+  const frame = $("#videoFrame");
+  if(embed){
+    frame.innerHTML =
+      '<iframe src="' + embed + '" title="Match replay" allow="accelerometer; autoplay; ' +
+      'clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+      'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+  }else{
+    frame.innerHTML =
+      '<div class="video-fallback"><p style="margin:0;color:var(--muted)">' +
+      'This replay is hosted outside YouTube and cannot be embedded here.</p>' +
+      '<a class="btn btn--primary" href="' + m.video + '" target="_blank" rel="noopener noreferrer">' +
+      'Open the replay &#8599;</a></div>';
+  }
+
+  const done = m.status === "completed";
+  $("#videoScore").innerHTML = m.teams.map((t, i) =>
+      '<span class="modal__team' + (done && m.winner === i ? " win" : "") + '">' +
+        t.name + ' <span class="s">' + (t.score ?? "–") + '</span>' +
+        (done && m.winner === i
+          ? '<span style="display:inline-flex;width:15px;color:var(--gold)">' + TROPHY_SVG + '</span>'
+          : '') +
+      '</span>'
+    ).join('<span class="modal__vs">vs</span>');
+
+  const ext = $("#videoExternal");
+  ext.href = m.video;
+  ext.textContent = embed ? "Open on YouTube ↗" : "Open replay ↗";
+
+  if(typeof modal.showModal === "function") modal.showModal();
+  else modal.setAttribute("open", "");
+}
+
+function closeVideo(){
+  $("#videoFrame").innerHTML = "";   // stops playback
+  if(modal.open && typeof modal.close === "function") modal.close();
+  else modal.removeAttribute("open");
+}
+
+$("#videoClose").addEventListener("click", closeVideo);
+modal.addEventListener("close", () => { $("#videoFrame").innerHTML = ""; });
+modal.addEventListener("click", e => { if(e.target === modal) closeVideo(); });
+$("#watchFinal").addEventListener("click", () => {
+  const finalMatch = TOURNAMENT.rounds[TOURNAMENT.rounds.length - 1].matches[0];
+  if(isPlayable(finalMatch)) openVideo(finalMatch.id);
+  else toast("The Grand Final replay is not published yet.");
+});
+
+/* ==================================================================
+   SIGNUP FORM
+   ================================================================== */
+const STORE = "apex-circuit.signups";
+const form  = $("#signupForm");
+
+const loadSignups = () => {
+  try{ return JSON.parse(localStorage.getItem(STORE)) || []; }
+  catch(e){ return []; }
+};
+const saveSignups = list => {
+  try{ localStorage.setItem(STORE, JSON.stringify(list)); }catch(e){}
+};
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+}
+
+function renderRoster(){
+  const list = loadSignups();
+  const ul   = $("#rosterList");
+  $("#rosterCount").textContent = list.length;
+  if(!list.length){
+    ul.innerHTML = '<li class="empty" style="display:block">No teams registered yet — be the first.</li>';
+    return;
+  }
+  ul.innerHTML = list.map((s, i) =>
+    '<li><span class="t">' + escapeHtml(s.team) + '</span>' +
+    '<span class="r">' + escapeHtml(s.region) + '</span>' +
+    '<button type="button" data-remove="' + i + '" aria-label="Remove ' +
+      escapeHtml(s.team) + '">&#10005;</button></li>'
+  ).join("");
+}
+
+$("#rosterList").addEventListener("click", e => {
+  const btn = e.target.closest("[data-remove]");
+  if(!btn) return;
+  const list = loadSignups();
+  const removed = list.splice(Number(btn.dataset.remove), 1)[0];
+  saveSignups(list);
+  renderRoster();
+  toast((removed ? removed.team : "Entry") + " withdrawn.");
+});
+
+function setError(name, message){
+  const err = $('[data-err-for="' + name + '"]');
+  const fld = $("#" + name)?.closest(".field");
+  if(err) err.textContent = message || "";
+  if(fld) fld.classList.toggle("has-error", !!message);
+  return !message;
+}
+
+function validate(){
+  const v = id => ($("#" + id).value || "").trim();
+  let ok = true;
+
+  ok = setError("team",    v("team").length >= 2 ? "" : "Please enter your team name (2+ characters).") && ok;
+  ok = setError("captain", v("captain").length >= 2 ? "" : "Please enter the captain's in-game name.") && ok;
+  ok = setError("email",   /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v("email")) ? "" : "Enter a valid e-mail address.") && ok;
+  ok = setError("region",  v("region") ? "" : "Choose a region.") && ok;
+  ok = setError("roster",  v("roster") ? "" : "Choose a roster size.") && ok;
+
+  const agreeErr = $('[data-err-for="agree"]');
+  if(!$("#agree").checked){
+    agreeErr.textContent = "You must accept the ruleset to register.";
+    ok = false;
+  }else agreeErr.textContent = "";
+
+  const dupe = loadSignups().some(s => s.team.toLowerCase() === v("team").toLowerCase());
+  if(dupe) ok = setError("team", "That team name is already registered.") && ok;
+
+  return ok;
+}
+
+["team","captain","email","region","roster"].forEach(id => {
+  $("#" + id).addEventListener("input",  () => setError(id, ""));
+  $("#" + id).addEventListener("change", () => setError(id, ""));
+});
+$("#agree").addEventListener("change", () => {
+  if($("#agree").checked) $('[data-err-for="agree"]').textContent = "";
+});
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  if(!validate()){
+    $(".has-error input, .has-error select")?.focus();
+    toast("Please fix the highlighted fields.");
+    return;
+  }
+  const entry = {
+    team:     $("#team").value.trim(),
+    captain:  $("#captain").value.trim(),
+    email:    $("#email").value.trim(),
+    region:   $("#region").value,
+    roster:   $("#roster").value,
+    discord:  $("#discord").value.trim(),
+    notes:    $("#notes").value.trim(),
+    at:       new Date().toISOString()
+  };
+
+  /* ---- Swap this block for a real endpoint when you go live ----
+     fetch("https://formspree.io/f/YOUR_ID", {
+       method: "POST",
+       headers: { "Content-Type": "application/json", Accept: "application/json" },
+       body: JSON.stringify(entry)
+     });
+  ---------------------------------------------------------------- */
+  const list = loadSignups();
+  list.unshift(entry);
+  saveSignups(list);
+  renderRoster();
+  form.reset();
+  $$(".field").forEach(f => f.classList.remove("has-error"));
+  $$(".err").forEach(el => el.textContent = "");
+  toast("✅ " + entry.team + " registered for the Season 6 qualifier!");
+});
+
+form.addEventListener("reset", () => {
+  $$(".field").forEach(f => f.classList.remove("has-error"));
+  $$(".err").forEach(el => el.textContent = "");
+});
+
+/* ==================================================================
+   TOAST / THEME / BOOT
+   ================================================================== */
+let toastTimer;
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 3600);
+}
+
+const THEME_KEY = "apex-circuit.theme";
+function applyTheme(mode){
+  document.documentElement.setAttribute("data-theme", mode);
+  $("#themeToggle").innerHTML = mode === "dark" ? "&#9790;" : "&#9728;";
+  try{ localStorage.setItem(THEME_KEY, mode); }catch(e){}
+}
+$("#themeToggle").addEventListener("click", () => {
+  applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  requestAnimationFrame(drawLinks);
+});
+
+(function boot(){
+  let saved = null;
+  try{ saved = localStorage.getItem(THEME_KEY); }catch(e){}
+  applyTheme(saved || "dark");
+
+  $("#year").textContent = new Date().getFullYear();
+  renderBracket();
+  renderRoster();
+
+  window.addEventListener("resize", () => requestAnimationFrame(drawLinks));
+  window.addEventListener("load",   () => requestAnimationFrame(drawLinks));
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(() => drawLinks());
+  if("ResizeObserver" in window){
+    new ResizeObserver(() => drawLinks()).observe($("#bracketCanvas"));
+  }
+})();
+</script>
+</body>
+</html>
