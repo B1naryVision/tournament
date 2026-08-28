@@ -1,0 +1,5 @@
+# scratch output from curl / debugging — never part of the site
+*.txt
+!requirements.txt
+hdr*.txt
+body*.txt
