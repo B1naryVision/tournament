@@ -6,7 +6,10 @@ recordings and open enlistment. Static site — no build step, no backend.
 
 ```
 .nojekyll           tells Pages to skip the Jekyll build — serve the files as-is
-index.html          the whole site (markup, styles, script, data)
+index.html          bracket, qualifiers and enlistment (markup, script, data)
+rules.html          the ruleset — "The Rule of the Mask" and "Terms of the Siege"
+assets/site.css     every style on both pages
+assets/theme.js     the night/parchment toggle and the footer year, shared by both pages
 assets/duel.jpg     hero — knight vs. axeman
 assets/knight.jpg   "The Rule of the Mask" band
 assets/berserker.jpg enlistment band
@@ -16,7 +19,7 @@ assets/favicon.png  the same shield at 48px, for the tab
 
 ## Deploy to GitHub Pages
 
-1. Push `index.html` **and the `assets/` folder** to the repository root.
+1. Push `index.html`, `rules.html` **and the `assets/` folder** to the repository root.
 2. **Settings → Pages**: Source = *Deploy from a branch*, Branch = `main`, folder = `/ (root)`.
 3. Live at `https://<user>.github.io/<repo>/` within a minute or two.
 
@@ -134,10 +137,10 @@ the crown is settled.
 
 ## The rulebook section
 
-`#rules` — *Terms of the Siege* — is the organiser's ruleset written straight into the markup.
-There is no data object behind it and no JavaScript touching it; edit the HTML when a rule
-changes. It sits between "The Rule of the Mask" and the enlistment band, in a two-column
-`.rules-grid` (`.span-2` makes a card full width):
+*Terms of the Siege* is the organiser's ruleset written straight into the markup. There is no data
+object behind it and no JavaScript touching it; edit the HTML when a rule changes. It lives on
+[rules.html](rules.html) as `#rules`, below "The Rule of the Mask" (`#format` on the same page), in
+a two-column `.rules-grid` (`.span-2` makes a card full width):
 
 | Card | What it holds |
 | --- | --- |
@@ -152,7 +155,8 @@ changes. It sits between "The Rule of the Mask" and the enlistment band, in a tw
 Three rules are deliberately repeated elsewhere rather than left only here, because they change
 what a player does before they ever reach this section: the **assigned alias** and the **media
 embargo** are creed items I and V in "The Rule of the Mask", the embargo again explains why the
-bracket shows *Recording to come*, and the enlistment consent checkbox links back to `#rules`.
+bracket shows *Recording to come*, and the enlistment consent checkbox links across to
+`rules.html`.
 
 ## Updating sieges, scores and recordings
 
