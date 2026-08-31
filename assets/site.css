@@ -226,6 +226,16 @@ button{font:inherit;color:inherit}
 .stat__k{font-family:var(--f-title);font-size:1.5rem;font-weight:700;line-height:1;color:var(--gold)}
 .stat__l{font-family:var(--f-head);color:var(--muted);font-size:.66rem;
   text-transform:uppercase;letter-spacing:.2em;margin-top:9px}
+
+/* Waiting on a number that comes over the wire. Sized to the 1.5rem cap
+   height of .stat__k so the tile does not jump when the figure lands. */
+.spinner{
+  display:inline-block;width:18px;height:18px;vertical-align:-2px;
+  border:2px solid var(--line);border-top-color:var(--gold);border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinner-pulse{to{opacity:.25}}
 @media(max-width:980px){
   .hero__inner{grid-template-columns:1fr;gap:44px}
   .poster{max-width:440px;margin:0 auto}
@@ -664,4 +674,7 @@ dialog#videoModal::backdrop{background:rgba(8,5,3,.86);backdrop-filter:blur(4px)
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
+  /* A frozen spinner looks like a bug rather than a wait, so this one keeps
+     a cue — an opacity fade, which carries no motion across the screen. */
+  .spinner{animation:spinner-pulse 1.1s ease-in-out infinite alternate!important;border-top-color:var(--gold)}
 }

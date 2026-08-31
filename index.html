@@ -1037,10 +1037,24 @@ function guessRealm(){
     "change it if you would rather fight at another hour.";
 }
 
+/* Before the draw the hero's first tile counts pledges, and that number
+   comes from a cold Apps Script that can take a second or two. Show a
+   spinner for the wait rather than an em dash that looks like the answer. */
+const SPINNER = '<span class="spinner" role="status" aria-label="Loading"></span>';
+const countsPledges = () => TOURNAMENT.preview && !!MUSTER_COUNT_URL;
+
+function setPledgeTile(html){
+  const tile = $("#statLords");
+  tile.innerHTML = html;
+  tile.setAttribute("aria-busy", String(html === SPINNER));
+}
+
 /* The badge stays hidden unless a real number arrives: an absent tally is
-   honest, a stale or invented one is not. */
+   honest, a stale or invented one is not. The tile falls back to the same
+   em dash it started with, for the same reason. */
 async function loadPledgeCount(){
   if(!MUSTER_COUNT_URL) return;
+  if(countsPledges()) setPledgeTile(SPINNER);
   try{
     const res = await fetch(MUSTER_COUNT_URL, { cache: "no-store" });
     if(!res.ok) throw new Error(res.status);
@@ -1048,14 +1062,16 @@ async function loadPledgeCount(){
        redirect, a CSV of the actual rows — is refused rather than mined for
        digits, which would put an invented figure on the front page. */
     const line = (await res.text()).trim().split(/\r?\n/).pop().trim();
-    if(!/^[0-9]{1,7}$/.test(line)) return;
+    if(!/^[0-9]{1,7}$/.test(line)) throw new Error("not a count");
     const n = parseInt(line, 10);
     const el = $("#musterCount");
     el.textContent = n + (n === 1 ? " banner pledged" : " banners pledged");
     el.hidden = false;
-    /* Before the draw the hero's first tile counts pledges, not lords. */
-    if(TOURNAMENT.preview) $("#statLords").textContent = n;
-  }catch(e){ /* leave it hidden */ }
+    if(countsPledges()) setPledgeTile(String(n));
+  }catch(e){
+    /* Leave the badge hidden, and put the tile back to its em dash. */
+    if(countsPledges()) setPledgeTile("\u2014");
+  }
 }
 
 function setError(name, message){
