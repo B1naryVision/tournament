@@ -31,7 +31,6 @@
     </a>
     <nav class="nav__links">
       <a href="#bracket">The Bracket</a>
-      <a href="#qualifiers" data-optional>Qualifiers</a>
       <a href="rules.html#format" data-optional>The Format</a>
       <a href="rules.html#rules" data-optional>The Rules</a>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch between night and parchment" title="Night / parchment"></button>
@@ -45,13 +44,15 @@
 <section class="hero">
   <div class="wrap hero__inner">
     <div>
-      <span class="badge"><span class="dot"></span> Season I &middot; Enlistment open</span>
+      <span class="badge"><span class="dot"></span> Season I &middot; Eleven lords, field closed</span>
       <h1>The Hidden <em>Cup</em></h1>
       <p class="hero__game">Stronghold&nbsp;2 &middot; 1v1 Invitational</p>
       <p class="lead">Not one lord who rides out will be named. Each fights behind a
         <strong>heraldic alias</strong> &mdash; no tags, no reputations, no crowd favourites. Only the
-        sieges. <strong>Sixteen</strong> reach the main event, single elimination, best of five;
-        every match is recorded, and the masks come off once the crown is settled.</p>
+        sieges. <strong>Eleven</strong> answered the call, so the draw falls short of a full sixteen:
+        five ride straight to the quarter-finals, the other six fight their way there. Single
+        elimination, best of three; every match is recorded, and the masks come off once the crown
+        is settled.</p>
       <div class="hero__cta">
         <a class="btn btn--primary" href="#bracket">Enter the bracket</a>
         <a class="btn" href="#enlist">Pledge your banner</a>
@@ -59,7 +60,7 @@
       <div class="stats">
         <div class="stat"><div class="stat__k" id="statLords">&mdash;</div><div class="stat__l" id="statLordsL">Lords</div></div>
         <div class="stat"><div class="stat__k" id="statSieges">&mdash;</div><div class="stat__l" id="statSiegesL">Sieges</div></div>
-        <div class="stat"><div class="stat__k">$100</div><div class="stat__l">Purse</div></div>
+        <div class="stat"><div class="stat__k">$150</div><div class="stat__l">Purse</div></div>
         <div class="stat"><div class="stat__k" id="statVods">&mdash;</div><div class="stat__l">Recordings</div></div>
       </div>
     </div>
@@ -83,14 +84,19 @@
 <section class="section" id="bracket">
   <div class="wrap">
     <div class="section__head">
-      <p class="eyebrow">Single elimination</p>
+      <p class="eyebrow">Single elimination &middot; eleven lords</p>
       <h2>The Road to the Keep</h2>
       <hr class="rule">
-      <p>Sixteen lords, one defeat and out. Winners march right, from the outer bailey to the
-        keep &mdash; <strong>best of five</strong> all the way, <strong>best of seven</strong> for the
-        final and for the third-place siege. Any match marked <strong>Watch</strong> opens its full
-        recording here on the page. Results go up as they are reported; the recordings follow once the
-        whole tournament is over, and every lord stays masked until you choose otherwise.</p>
+      <p><strong>Eleven</strong> banners rode in, and a bracket wants sixteen. Five lords are drawn a
+        <strong>bye</strong> and pass the outer ward without a siege; the remaining six fight three
+        opening sieges for the last three places in the quarter-finals. From there it is the same road
+        for everyone &mdash; one defeat and out, winners marching right toward the keep,
+        <strong>best of three</strong> all the way, <strong>best of five</strong> for the final and for
+        the third-place siege. A short field is paid for here: reach the crown from an opening siege
+        and you will have fought one series more than the lord who was handed a bye.</p>
+      <p>Any match marked <strong>Watch</strong> opens its full recording here on the page. Results go
+        up as they are reported; the recordings follow once the whole tournament is over, and every
+        lord stays masked until you choose otherwise.</p>
     </div>
 
     <div class="notice" id="previewNotice" role="note" hidden>
@@ -99,9 +105,9 @@
         <p><strong>Nothing below has been fought.</strong> Season&nbsp;I has not begun: every alias,
           score, map and recording on this bracket is a placeholder, put here to show how the draw
           will read once it is real.</p>
-        <p>The true bracket is drawn when enlistment closes on
-          <b>Sunday 13 September</b>. Until then, treat this as a picture of the format &mdash; not
-          a result.</p>
+        <p>The <em>shape</em> is real &mdash; <b>eleven lords</b>, five byes, three opening sieges.
+          Only the names, scores and seeding are invented, and they are replaced the moment the draw
+          is made. Until then, treat this as a picture of the format, not a result.</p>
       </div>
     </div>
 
@@ -112,6 +118,7 @@
       <button class="btn btn--sm" id="watchFinal" type="button">Watch the final siege</button>
       <div class="legend">
         <span><i class="swatch swatch--win"></i> Victor</span>
+        <span><i class="swatch swatch--bye"></i> Bye</span>
         <span><i class="swatch"></i> Unfought</span>
       </div>
     </div>
@@ -126,55 +133,21 @@
   </div>
 </section>
 
-<!-- ============================ QUALIFIERS ============================ -->
-<section class="section" id="qualifiers">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="eyebrow" id="qualEyebrow">The qualifiers</p>
-      <h2>Storming the Gate</h2>
-      <hr class="rule">
-      <p>The main event seats <strong>sixteen</strong>. If more than sixteen banners are pledged,
-        the qualifiers decide which of them ride &mdash; fought <strong>under your own gamertag</strong>,
-        not an alias. The draw is random, and byes are handed out at random depending on how many turn
-        up. The mask comes later, so the qualifiers are followed openly: bring your friends, and let
-        them watch you climb.</p>
-    </div>
-
-    <div class="notice" id="qualPreviewNotice" role="note" hidden>
-      <span class="notice__tag">Showcase</span>
-      <div><p>Placeholder results, shown so you can see how the qualifiers will read.
-        The real draw is made when enlistment closes.</p></div>
-    </div>
-
-    <div class="qual-scroll">
-      <table class="qual">
-        <caption class="sr-only">Qualifier results, best of three</caption>
-        <thead>
-          <tr><th scope="col">Day</th><th scope="col" colspan="3">Siege</th><th scope="col">Outcome</th></tr>
-        </thead>
-        <tbody id="qualBody"></tbody>
-      </table>
-    </div>
-    <p class="qual__foot" id="qualSummary"></p>
-    <p class="qual__note">Report your own scores in the tournament channel as soon as a series ends
-      &mdash; that is how this table is filled in. Qualifier recordings are held back until the crown is
-      settled: a public tape of how a lord plays is what gives an alias away, a public result is not.</p>
-  </div>
-</section>
-
 <!-- ============================ ENLIST ============================ -->
 <section class="band band--flip" id="enlist">
   <div class="wrap band__grid">
     <div>
-      <p class="eyebrow">Season I &middot; Open enlistment</p>
+      <p class="eyebrow">Season I &middot; The reserve list</p>
       <h2>Pledge Your Banner</h2>
       <hr class="rule">
-      <p style="color:var(--muted);margin:0 0 26px">Enlistment is uncapped; the main event is not.
-        <b>Sixteen</b> lords ride in it, and if more than sixteen banners are pledged the qualifiers
-        decide which sixteen &mdash; random draw, random byes. So bring every lord you know; a bigger
-        field only makes the gate harder to storm. Your alias is not yours to pick &mdash; it is
-        assigned once the field is settled, and from that moment it is the only name the audience sees
-        until the crown is decided.</p>
+      <p style="color:var(--muted);margin:0 0 26px">Season&nbsp;I rides with <b>eleven</b> lords, and
+        that field is closed. Eleven is short of a full bracket, so there are <b>no qualifiers</b>
+        &mdash; every banner that was pledged goes straight into the draw, and the five byes make up
+        the difference. Enlistment stays open all the same: pledge now and you stand on the
+        <b>reserve list</b>, first called if a lord withdraws before the opening sieges, and first in
+        the muster when Season&nbsp;II is drawn. Your alias is not yours to pick &mdash; it is assigned
+        once the field is settled, and from that moment it is the only name the audience sees until the
+        crown is decided.</p>
 
       <div class="notice notice--patch" role="note">
         <span class="notice__tag">Required</span>
@@ -195,7 +168,7 @@
           <h4>Your banner is pledged</h4>
           <p id="pledgedBody"></p>
           <p class="pledged__note">Nothing more is asked of you. Make sure the unofficial patch is
-            installed before the first siege &mdash; we will find you on Discord when the draw is made.</p>
+            installed before the first siege &mdash; we will find you on Discord the moment a place opens.</p>
           <button class="btn btn--sm" type="button" id="amendPledge">Something needs changing?</button>
         </div>
 
@@ -210,9 +183,9 @@
               <label for="lord">Your in-game name <span class="req">*</span></label>
               <input id="lord" name="lord" type="text" autocomplete="nickname" placeholder="The name you play under" required>
               <p class="err" data-err-for="lord"></p>
-              <p class="hint">The name we match you to in the lobby, and the name you fight the qualifiers
-                under &mdash; those results are public. Reach the main event and an alias replaces it; what
-                stays secret from there is <em>which</em> alias is yours, until the unmasking.</p>
+              <p class="hint">The name we match you to in the lobby, and the name we call you by on
+                Discord. Ride in the main event and an assigned alias replaces it entirely &mdash; your
+                real name is published nowhere until the unmasking.</p>
             </div>
 
             <div class="field">
@@ -242,7 +215,7 @@
               </select>
               <p class="err" data-err-for="region"></p>
               <p class="hint" id="regionHint">Where your clock sits, not your flag. We pair lords inside a
-                realm first, so the qualifiers run without anyone waiting up until four.</p>
+                realm first, so a siege runs without anyone waiting up until four.</p>
             </div>
 
             <div class="field">
@@ -271,9 +244,9 @@
 
             <label class="check">
               <input type="checkbox" id="agree" name="agree" required>
-              <span>I accept <a href="rules.html">the ruleset</a>. I understand the qualifiers are public
-                under my own gamertag, that the main event is fought behind an assigned alias, and that
-                I may publish none of my own footage until the tournament is over.&nbsp;<span class="req">*</span></span>
+              <span>I accept <a href="rules.html">the ruleset</a>. I understand that every siege is
+                fought behind an assigned alias, that the draw may hand me a bye or an extra series, and
+                that I may publish none of my own footage until the tournament is over.&nbsp;<span class="req">*</span></span>
             </label>
             <p class="err" data-err-for="agree" style="grid-column:1/-1;margin-top:-12px"></p>
 
@@ -281,8 +254,8 @@
               <button class="btn btn--primary" type="submit">Send my pledge</button>
               <button class="btn" type="reset">Clear</button>
               <span class="form-note">Discord, Steam and anything else you enter here stay with the
-                organisers and are never published. Your in-game name appears in the qualifier results, and
-                again beside your alias at the unmasking.</span>
+                organisers and are never published. Your in-game name appears in one place only &mdash;
+                beside your alias at the unmasking.</span>
             </div>
           </div>
         </form>
@@ -358,58 +331,12 @@
    winner : 0 (top) | 1 (bottom) | null
    video  : any YouTube URL, any other URL, or "" for none
    feeds  : { match: "<next match id>", slot: 0|1 }
+   bye    : true for a walkover. Give it ONE side, no score, no date, no
+            venue, and status "completed" with winner 0 — that is what
+            carries the lord into `feeds`. Used when the field is short of
+            a power of two, as Season I's eleven are.
    NOTE: names, maps and dates below are sample data — replace them.
    ================================================================== */
-/* ==================================================================
-   QUALIFIERS — fought openly, under real names.
-   ------------------------------------------------------------------
-   The mask starts at the main event: aliases are drawn only once the
-   field is settled, so nothing here needs concealing. Recordings are
-   held back until after the unmasking — a public tape of a lord's
-   habits is what actually gives an alias away, not a public result.
-   Each match: two `lord` names, a Best-of-3 score, and a winner.
-   status : "completed" | "unfought"   (same two states as the bracket)
-   ================================================================== */
-const QUALIFIERS = {
-  window:   "Fri 18 – Sun 20 September",
-  format:   "Best of 3",
-  entrants: null,     /* total banners fought; null while unknown */
-  matches: [
-    { id:"Q1",  date:"18 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Lord_Aldric",     score:2}, {lord:"Rook_of_Ely",     score:1} ] },
-    { id:"Q2",  date:"18 Sep", status:"completed", winner:1,
-      sides:[ {lord:"Marcher_Tam",     score:0}, {lord:"Erran_Hart",      score:2} ] },
-    { id:"Q3",  date:"18 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Vulpes_Alba",     score:2}, {lord:"Bastion_Grey",    score:1} ] },
-    { id:"Q4",  date:"18 Sep", status:"completed", winner:1,
-      sides:[ {lord:"Oswin_Vale",      score:1}, {lord:"Emberfang",       score:2} ] },
-    { id:"Q5",  date:"19 Sep", status:"completed", winner:0,
-      sides:[ {lord:"CorvusRex",       score:2}, {lord:"Halden_Mere",     score:0} ] },
-    { id:"Q6",  date:"19 Sep", status:"completed", winner:0,
-      sides:[ {lord:"SirBrannoc",      score:2}, {lord:"Fenwick_Roe",     score:1} ] },
-    { id:"Q7",  date:"19 Sep", status:"completed", winner:1,
-      sides:[ {lord:"Caddow_Fell",     score:1}, {lord:"Houndmaster_Cai", score:2} ] },
-    { id:"Q8",  date:"19 Sep", status:"completed", winner:0,
-      sides:[ {lord:"HeronBlack",      score:2}, {lord:"Alder_Whitt",     score:1} ] },
-    { id:"Q9",  date:"19 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Wulfric_Dane",    score:2}, {lord:"Perrin_Stow",     score:0} ] },
-    { id:"Q10", date:"20 Sep", status:"completed", winner:1,
-      sides:[ {lord:"Bram_Ashford",    score:1}, {lord:"Mordant_Kay",     score:2} ] },
-    { id:"Q11", date:"20 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Ser_Lockwood",    score:2}, {lord:"Tybalt_Gorse",    score:1} ] },
-    { id:"Q12", date:"20 Sep", status:"completed", winner:1,
-      sides:[ {lord:"Ganelon_Rees",    score:0}, {lord:"Ravenna_Cole",    score:2} ] },
-    { id:"Q13", date:"20 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Old_Fitzhugh",    score:2}, {lord:"Cuthbert_Vane",   score:1} ] },
-    { id:"Q14", date:"20 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Ironshod_Bel",    score:2}, {lord:"Selwyn_March",    score:1} ] },
-    { id:"Q15", date:"20 Sep", status:"completed", winner:1,
-      sides:[ {lord:"Ansel_Pike",      score:1}, {lord:"Draymar_Kell",    score:2} ] },
-    { id:"Q16", date:"20 Sep", status:"unfought",  winner:null,
-      sides:[ {lord:"Grimwald_Roth",   score:0}, {lord:"Ulric_Bayne",     score:0} ] }
-  ]
-};
-
 const TOURNAMENT = {
   name: "The Hidden Cup",
   game: "Stronghold 2",
@@ -420,64 +347,68 @@ const TOURNAMENT = {
      Set to false the moment you write the real draw in. */
   preview: true,
 
+  /* ----------------------------------------------------------------
+     ELEVEN LORDS, NOT SIXTEEN.
+     A 16-draw needs 16; eleven turned up, so five get a bye through the
+     opening round and six fight for the last three quarter-final places.
+     11 = 5 byes + 3 sieges (6 lords), and 5 + 3 = 8 into the quarters.
+     Byes go to the top five seeds, exactly where seeds 12-16 would have
+     sat, so the shape of a standard bracket is preserved:
+         1 bye        │ 8 v 9        → QF1
+         4 bye        │ 5 bye        → QF2   (neither fights the ward)
+         3 bye        │ 6 v 11       → QF3
+         7 v 10       │ 2 bye        → QF4
+     A bye is a match with `bye:true` and a single side. It carries no
+     score and no recording; it only feeds a lord into the next round.
+     ---------------------------------------------------------------- */
   rounds: [
     {
-      id: "r16", name: "Round of 16", sub: "The Outer Ward",
+      id: "r1", name: "Opening Round", sub: "The Outer Ward",
       matches: [
         {
-          id:"R1", label:"Siege I", date:"26 Sep", format:"Best of 5",
-          venue:"HC Volcano", status:"completed", winner:0,
-          sides:[ {alias:"The Gilded Lion",   lord:"Lord_Aldric",   seed:1,  score:3},
-                  {alias:"The Thorn Griffin", lord:"Grimwald_Roth", seed:16, score:0} ],
+          id:"B1", bye:true, label:"Bye", status:"completed", winner:0,
+          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric", seed:1} ],
           video:"", feeds:{ match:"QF1", slot:0 }
         },
         {
-          id:"R2", label:"Siege II", date:"26 Sep", format:"Best of 5",
-          venue:"HC Cross", status:"completed", winner:1,
-          sides:[ {alias:"The Grey Mastiff", lord:"Wulfric_Dane", seed:9, score:2},
-                  {alias:"The Stag Errant",  lord:"Erran_Hart",   seed:8, score:3} ],
+          id:"R1", label:"Siege I", date:"26 Sep", format:"Best of 3",
+          venue:"HC Volcano", status:"completed", winner:0,
+          sides:[ {alias:"The Stag Errant",  lord:"Erran_Hart",   seed:8, score:2},
+                  {alias:"The Grey Mastiff", lord:"Wulfric_Dane", seed:9, score:1} ],
           video:"", feeds:{ match:"QF1", slot:1 }
         },
         {
-          id:"R3", label:"Siege III", date:"26 Sep", format:"Best of 5",
-          venue:"HC Four Woods", status:"completed", winner:0,
-          sides:[ {alias:"The Pale Fox",  lord:"Vulpes_Alba",  seed:4,  score:3},
-                  {alias:"The Salt Drake", lord:"Old_Fitzhugh", seed:13, score:1} ],
+          id:"B2", bye:true, label:"Bye", status:"completed", winner:0,
+          sides:[ {alias:"The Pale Fox", lord:"Vulpes_Alba", seed:4} ],
           video:"", feeds:{ match:"QF2", slot:0 }
         },
         {
-          id:"R4", label:"Siege IV", date:"26 Sep", format:"Best of 5",
-          venue:"HC Battle Arena", status:"completed", winner:0,
-          sides:[ {alias:"The Ember Wolf",    lord:"Emberfang",    seed:5,  score:3},
-                  {alias:"The Vespers Raven", lord:"Ravenna_Cole", seed:12, score:2} ],
+          id:"B3", bye:true, label:"Bye", status:"completed", winner:0,
+          sides:[ {alias:"The Ember Wolf", lord:"Emberfang", seed:5} ],
           video:"", feeds:{ match:"QF2", slot:1 }
         },
         {
-          id:"R5", label:"Siege V", date:"27 Sep", format:"Best of 5",
-          venue:"HC Total Madness", status:"completed", winner:0,
-          sides:[ {alias:"The Ash Crow",      lord:"CorvusRex",    seed:3,  score:3},
-                  {alias:"The Winter Falcon", lord:"Ironshod_Bel", seed:14, score:1} ],
+          id:"B4", bye:true, label:"Bye", status:"completed", winner:0,
+          sides:[ {alias:"The Ash Crow", lord:"CorvusRex", seed:3} ],
           video:"", feeds:{ match:"QF3", slot:0 }
         },
         {
-          id:"R6", label:"Siege VI", date:"27 Sep", format:"Best of 5",
-          venue:"HC 4H Arena", status:"completed", winner:0,
-          sides:[ {alias:"The Boar of Wessex", lord:"SirBrannoc",   seed:6,  score:3},
-                  {alias:"The Oaken Bear",     lord:"Ser_Lockwood", seed:11, score:2} ],
+          id:"R2", label:"Siege II", date:"26 Sep", format:"Best of 3",
+          venue:"HC Cross", status:"completed", winner:0,
+          sides:[ {alias:"The Boar of Wessex", lord:"SirBrannoc",   seed:6,  score:2},
+                  {alias:"The Oaken Bear",     lord:"Ser_Lockwood", seed:11, score:1} ],
           video:"", feeds:{ match:"QF3", slot:1 }
         },
         {
-          id:"R7", label:"Siege VII", date:"27 Sep", format:"Best of 5",
-          venue:"HC Fox Mountain", status:"completed", winner:0,
-          sides:[ {alias:"The Black Heron",  lord:"HeronBlack",  seed:7,  score:3},
-                  {alias:"The Silver Adder", lord:"Mordant_Kay", seed:10, score:2} ],
+          id:"R3", label:"Siege III", date:"26 Sep", format:"Best of 3",
+          venue:"HC Four Woods", status:"completed", winner:0,
+          sides:[ {alias:"The Black Heron",  lord:"HeronBlack",  seed:7,  score:2},
+                  {alias:"The Silver Adder", lord:"Mordant_Kay", seed:10, score:1} ],
           video:"", feeds:{ match:"QF4", slot:0 }
         },
         {
-          id:"R8", label:"Siege VIII", date:"27 Sep", format:"Best of 5",
-          venue:"HC Volcano", status:"completed", winner:0,
-          sides:[ {alias:"The Iron Hound", lord:"Houndmaster_Cai", seed:2,  score:3},
-                  {alias:"The Bronze Ram", lord:"Draymar_Kell",    seed:15, score:0} ],
+          id:"B5", bye:true, label:"Bye", status:"completed", winner:0,
+          sides:[ {alias:"The Iron Hound", lord:"Houndmaster_Cai", seed:2} ],
           video:"", feeds:{ match:"QF4", slot:1 }
         }
       ]
@@ -486,34 +417,34 @@ const TOURNAMENT = {
       id: "qf", name: "Quarter-Finals", sub: "The Outer Bailey",
       matches: [
         {
-          id:"QF1", label:"Siege IX", date:"2 Oct", format:"Best of 5",
-          venue:"HC Four Woods", status:"completed", winner:0,
-          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric",  seed:1, score:3},
-                  {alias:"The Stag Errant", lord:"Erran_Hart",   seed:8, score:1} ],
+          id:"QF1", label:"Siege IV", date:"27 Sep", format:"Best of 3",
+          venue:"HC Battle Arena", status:"completed", winner:0,
+          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric", seed:1, score:2},
+                  {alias:"The Stag Errant", lord:"Erran_Hart",  seed:8, score:1} ],
           video:"https://www.youtube.com/watch?v=sa35WNEhT84",
           feeds:{ match:"SF1", slot:0 }
         },
         {
-          id:"QF2", label:"Siege X", date:"2 Oct", format:"Best of 5",
-          venue:"HC Cross", status:"completed", winner:1,
-          sides:[ {alias:"The Pale Fox",  lord:"Vulpes_Alba", seed:4, score:2},
-                  {alias:"The Ember Wolf", lord:"Emberfang",  seed:5, score:3} ],
+          id:"QF2", label:"Siege V", date:"27 Sep", format:"Best of 3",
+          venue:"HC Total Madness", status:"completed", winner:1,
+          sides:[ {alias:"The Pale Fox",   lord:"Vulpes_Alba", seed:4, score:1},
+                  {alias:"The Ember Wolf", lord:"Emberfang",   seed:5, score:2} ],
           video:"https://www.youtube.com/watch?v=F-cHHc6SQN0",
           feeds:{ match:"SF1", slot:1 }
         },
         {
-          id:"QF3", label:"Siege XI", date:"2 Oct", format:"Best of 5",
-          venue:"HC Total Madness", status:"completed", winner:0,
-          sides:[ {alias:"The Ash Crow",       lord:"CorvusRex",  seed:3, score:3},
+          id:"QF3", label:"Siege VI", date:"27 Sep", format:"Best of 3",
+          venue:"HC 4H Arena", status:"completed", winner:0,
+          sides:[ {alias:"The Ash Crow",       lord:"CorvusRex",  seed:3, score:2},
                   {alias:"The Boar of Wessex", lord:"SirBrannoc", seed:6, score:0} ],
           video:"https://www.youtube.com/watch?v=oqbFrVJKLrU",
           feeds:{ match:"SF2", slot:0 }
         },
         {
-          id:"QF4", label:"Siege XII", date:"2 Oct", format:"Best of 5",
-          venue:"HC Battle Arena", status:"completed", winner:0,
-          sides:[ {alias:"The Iron Hound",  lord:"Houndmaster_Cai", seed:2, score:3},
-                  {alias:"The Black Heron", lord:"HeronBlack",      seed:7, score:2} ],
+          id:"QF4", label:"Siege VII", date:"27 Sep", format:"Best of 3",
+          venue:"HC Four Woods", status:"completed", winner:1,
+          sides:[ {alias:"The Black Heron", lord:"HeronBlack",      seed:7, score:1},
+                  {alias:"The Iron Hound",  lord:"Houndmaster_Cai", seed:2, score:2} ],
           video:"https://www.youtube.com/watch?v=f5VoafBrchI",
           feeds:{ match:"SF2", slot:1 }
         }
@@ -523,18 +454,18 @@ const TOURNAMENT = {
       id: "sf", name: "Semi-Finals", sub: "The Inner Bailey",
       matches: [
         {
-          id:"SF1", label:"Siege XIII", date:"3 Oct", format:"Best of 5",
-          venue:"HC 4H Arena", status:"completed", winner:0,
-          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric", seed:1, score:3},
-                  {alias:"The Ember Wolf",  lord:"Emberfang",   seed:5, score:2} ],
+          id:"SF1", label:"Siege VIII", date:"3 Oct", format:"Best of 3",
+          venue:"HC Cross", status:"completed", winner:0,
+          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric", seed:1, score:2},
+                  {alias:"The Ember Wolf",  lord:"Emberfang",   seed:5, score:1} ],
           video:"https://www.youtube.com/watch?v=50hnKqnVluY",
           feeds:{ match:"F1", slot:0 }
         },
         {
-          id:"SF2", label:"Siege XIV", date:"3 Oct", format:"Best of 5",
-          venue:"HC Fox Mountain", status:"completed", winner:1,
+          id:"SF2", label:"Siege IX", date:"3 Oct", format:"Best of 3",
+          venue:"HC Volcano", status:"completed", winner:1,
           sides:[ {alias:"The Ash Crow",   lord:"CorvusRex",       seed:3, score:1},
-                  {alias:"The Iron Hound", lord:"Houndmaster_Cai", seed:2, score:3} ],
+                  {alias:"The Iron Hound", lord:"Houndmaster_Cai", seed:2, score:2} ],
           video:"https://www.youtube.com/watch?v=kKTTO3xuWC0",
           feeds:{ match:"F1", slot:1 }
         }
@@ -546,18 +477,18 @@ const TOURNAMENT = {
       id: "f", name: "The Final", sub: "The Keep",
       matches: [
         {
-          id:"F1", label:"The Final Siege", date:"4 Oct", format:"Best of 7",
+          id:"F1", label:"The Final Siege", date:"4 Oct", format:"Best of 5",
           venue:"HC Volcano", status:"completed", winner:0,
-          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric",     seed:1, score:4},
+          sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric",     seed:1, score:3},
                   {alias:"The Iron Hound",  lord:"Houndmaster_Cai", seed:2, score:2} ],
           video:"https://www.youtube.com/watch?v=fIbAl2h5Sao",
           feeds:null
         },
         {
-          id:"T1", label:"Third Place", date:"4 Oct", format:"Best of 7",
+          id:"T1", label:"Third Place", date:"4 Oct", format:"Best of 5",
           venue:"HC Cross", status:"completed", winner:1,
-          sides:[ {alias:"The Ember Wolf", lord:"Emberfang", seed:5, score:3},
-                  {alias:"The Ash Crow",   lord:"CorvusRex", seed:3, score:4} ],
+          sides:[ {alias:"The Ember Wolf", lord:"Emberfang", seed:5, score:2},
+                  {alias:"The Ash Crow",   lord:"CorvusRex", seed:3, score:3} ],
           video:"",
           feeds:null
         }
@@ -605,7 +536,9 @@ function toEmbedUrl(url){
 }
 
 const hasVideo   = m => !!(m.video && m.video.trim());
-const isPlayable = m => m.status !== "unfought" && hasVideo(m);
+const isPlayable = m => !m.bye && m.status !== "unfought" && hasVideo(m);
+/* Byes fill a short bracket; they are not sieges and never count as one. */
+const isSiege    = m => !m.bye;
 const victorOf   = m => (m.status === "completed" && m.winner != null) ? m.sides[m.winner] : null;
 
 /** What to call a competitor right now, given the mask state. */
@@ -631,49 +564,6 @@ const CROWN_SVG =
     '<circle cx="12" cy="3.6" r="1.3"/>' +
   '</svg>';
 
-/* ==================================================================
-   QUALIFIERS
-   ================================================================== */
-function renderQualifiers(){
-  const M = QUALIFIERS.matches || [];
-  $("#qualEyebrow").textContent =
-    [QUALIFIERS.window, QUALIFIERS.format].filter(Boolean).join(" \u00b7 ") || "The qualifiers";
-
-  const body = $("#qualBody");
-  if(!M.length){
-    body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--faint);' +
-      'font-style:italic;padding:32px 16px">The draw is made when enlistment closes.</td></tr>';
-    $("#qualSummary").textContent = "";
-    return;
-  }
-
-  body.innerHTML = M.map(m => {
-    const done = m.status === "completed" && m.winner !== null && m.winner !== undefined;
-    const a = m.sides[0] || {}, b = m.sides[1] || {};
-    const nm = (side, i) =>
-      '<td class="qual__name' + (i ? "" : " qual__name--r") +
-      (done && m.winner === i ? " is-winner" : "") + '">' +
-      escapeHtml(side.lord || "To be drawn") + '</td>';
-    return '<tr class="' + (done ? "is-done" : "is-open") + '">' +
-      '<td class="qual__day">' + escapeHtml(m.date || "") + '</td>' +
-      nm(a, 0) +
-      '<td class="qual__score">' + (done
-        ? escapeHtml(a.score + " \u2013 " + b.score)
-        : "Not yet fought") + '</td>' +
-      nm(b, 1) +
-      '<td>' + (done
-        ? '<span class="qual__tag qual__tag--in">Qualified</span>'
-        : '<span class="qual__tag">To come</span>') + '</td>' +
-    '</tr>';
-  }).join("");
-
-  const decided = M.filter(m => m.status === "completed" && m.winner !== null).length;
-  const entrants = QUALIFIERS.entrants;
-  $("#qualSummary").innerHTML = entrants
-    ? "<b>" + decided + "</b> of <b>" + entrants + "</b> banners have won through to the main event."
-    : "<b>" + decided + "</b> of <b>" + M.length + "</b> sieges decided \u2014 each victor takes a place in the bracket.";
-}
-
 function statusPill(m){
   if(m.status === "completed") return '<span class="pill pill--done">Decided</span>';
   return '<span class="pill">' + escapeHtml(m.date || "To come") + '</span>';
@@ -683,7 +573,7 @@ function combatantRow(m, i){
   const side = m.sides[i] || {};
   const name = displayName(side);
   const sub  = displaySub(side);
-  const done = m.status === "completed" && m.winner != null;
+  const done = !m.bye && m.status === "completed" && m.winner != null;
   const cls  = ["combatant"];
   if(done && m.winner === i) cls.push("is-winner");
   if(done && m.winner !== i) cls.push("is-loser");
@@ -700,7 +590,23 @@ function combatantRow(m, i){
     '</div>';
 }
 
+/* A bye is one lord and a closed gate: half a card, and deliberately quiet,
+   so the eye reads it as "passed through" rather than "won". */
+function byeCard(m){
+  const el = document.createElement("article");
+  el.className = "match match--bye";
+  el.id = "match-" + m.id;
+  el.innerHTML =
+    '<header class="match__meta"><span>' + escapeHtml(m.label || "Bye") + '</span>' +
+      '<span class="pill pill--bye">No siege</span></header>' +
+    combatantRow(m, 0) +
+    '<div class="match__foot"><span>Walkover</span>' +
+      '<span class="none">Straight through</span></div>';
+  return el;
+}
+
 function matchCard(m){
+  if(m.bye) return byeCard(m);
   const playable = isPlayable(m);
   const el = document.createElement("article");
   el.className = "match" + (playable ? " is-playable" : "");
@@ -820,7 +726,7 @@ function drawLinks(){
 }
 
 function updateStats(){
-  const ms = allMatches();
+  const ms = allMatches().filter(isSiege);
   const lords = new Set();
   TOURNAMENT.rounds[0].matches.forEach(m => m.sides.forEach(s => {
     const k = s.lord || s.alias; if(k) lords.add(k);
@@ -958,7 +864,8 @@ function renderEnlistState(){
     "We have your name, your Discord and your Steam profile" +
     (pledge.region ? ", riding for <b>" + escapeHtml(pledge.region) + "</b>" : "") +
     (stamp ? ", pledged on <b>" + escapeHtml(stamp) + "</b>" : "") +
-    ". The qualifiers come first \u2014 an alias is drawn for those who win through.";
+    ". Season\u00a0I's eleven are drawn already, so you stand on the reserve list \u2014 " +
+    "first called if a place opens, and first in the muster for Season\u00a0II.";
   form.hidden = true; panel.hidden = false;
 }
 
@@ -1167,7 +1074,7 @@ form.addEventListener("submit", async e => {
   renderEnlistState();
   loadPledgeCount();
   $("#pledgedPanel").scrollIntoView({ behavior:"smooth", block:"center" });
-  toast("Your banner is pledged. The qualifiers come first \u2014 aliases are drawn for those who win through.");
+  toast("Your banner is pledged. Season\u00a0I's field is closed at eleven \u2014 we will call on you if a place opens.");
 });
 
 form.addEventListener("reset", () => {
@@ -1194,11 +1101,9 @@ document.addEventListener("themechange", () => requestAnimationFrame(drawLinks))
 (function boot(){
   if(TOURNAMENT.preview){
     $("#previewNotice").hidden = false;
-    $("#qualPreviewNotice").hidden = false;
     $("#watchFinal").textContent = "Preview a siege recording";
   }
   renderBracket();
-  renderQualifiers();
   renderEnlistState();
   guessRealm();
   loadPledgeCount();

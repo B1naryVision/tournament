@@ -1,12 +1,13 @@
 # The Hidden Cup — Stronghold 2
 
-A Hidden-Cup-style tournament site for **Stronghold 2**: a sixteen-lord single-elimination 1v1
-bracket where every lord competes behind an assigned heraldic alias, with the full ruleset, siege
-recordings and open enlistment. Static site — no build step, no backend.
+A Hidden-Cup-style tournament site for **Stronghold 2**: a single-elimination 1v1 bracket where
+every lord competes behind an assigned heraldic alias, with the full ruleset, siege recordings and
+open enlistment. Season I rides with **eleven lords**, so the draw is short of a full sixteen and
+five byes make up the difference. Static site — no build step, no backend.
 
 ```
 .nojekyll           tells Pages to skip the Jekyll build — serve the files as-is
-index.html          bracket, qualifiers and enlistment (markup, script, data)
+index.html          bracket and enlistment (markup, script, data)
 rules.html          the ruleset — "The Rule of the Mask" and "Terms of the Siege"
 assets/site.css     every style on both pages
 assets/theme.js     the night/parchment toggle and the footer year, shared by both pages
@@ -50,7 +51,8 @@ python3 -m http.server      # then open http://localhost:8000
 Identities are concealed by default. **Reveal identities** (above the bracket) flips the whole
 site between the two states — bracket, recording modal and champion card all re-render:
 
-The toggle covers the **main event only** — the qualifier table always shows real names, by design.
+The toggle covers the whole bracket — there are no openly-fought rounds in Season I, so nothing
+else on the page carries a real name until it is pressed.
 
 | | Concealed | Revealed |
 |---|---|---|
@@ -74,16 +76,54 @@ Leave it concealed while the event runs; press it once the crown is settled.
 The bracket itself renders exactly as it will on the day — that is the point of leaving it in.
 Set `preview: false` once the real draw is written in, and all of it reverts on its own.
 
-### The field is sixteen
+### The field is eleven, and the bracket wants sixteen
 
-The main event seats **sixteen lords**: Round of 16 → Quarter-Finals → Semi-Finals → Final, best
-of five throughout, best of seven for the final and for the third-place siege. That is what the
-shipped `rounds` array builds, and what the copy across the page now says.
+Season I seats **eleven lords**: Opening Round → Quarter-Finals → Semi-Finals → Final, best of
+three throughout, best of five for the final and for the third-place siege. That is what the
+shipped `rounds` array builds, and what the copy across both pages says.
 
-The renderer is not tied to that number, so a different field only means editing `rounds` — eight
-lords drop the Round of 16, thirty-two add a Round of 32 in front of it. Add the round, point the
-previous round's `feeds` at its match ids, and column widths, connector lines and stat counters
-adapt on their own — see "Add or remove rounds" below. No CSS to touch.
+Eleven is not a power of two, so five lords are drawn a **bye** and reach the quarter-finals
+without a siege, while the other six fight three opening sieges for the last three places:
+
+```
+11 lords  =  5 byes + 3 sieges (6 lords)   →   5 + 3 = 8 in the quarter-finals
+```
+
+The byes sit on the top five seeds, exactly where seeds 12–16 would have been, so the shape of a
+standard 16-draw survives intact:
+
+```
+B1  seed 1  bye   │  R1  seed 8 v seed 9    →  QF1
+B2  seed 4  bye   │  B3  seed 5  bye        →  QF2   (neither fights the ward)
+B4  seed 3  bye   │  R2  seed 6 v seed 11   →  QF3
+R3  seed 7 v 10   │  B5  seed 2  bye        →  QF4
+```
+
+QF2 is bye against bye — with five byes and four quarter-finals, one quarter-final must be. The
+cost of a short field is that a lord coming up through the ward fights **one series more** than a
+lord handed a bye, and the bracket copy says so rather than hiding it.
+
+**Writing a bye.** A bye is an ordinary entry in `rounds[0].matches` with `bye: true`, a single
+side, no score, no `date` and no `venue`:
+
+```js
+{ id:"B1", bye:true, label:"Bye", status:"completed", winner:0,
+  sides:[ {alias:"The Gilded Lion", lord:"Lord_Aldric", seed:1} ],
+  video:"", feeds:{ match:"QF1", slot:0 } }
+```
+
+`status:"completed"` with `winner:0` is what carries the lord along `feeds` into the next round —
+that is the only reason those two fields are there. The renderer treats byes as a distinct thing
+throughout: `matchCard()` hands them to `byeCard()` (one combatant row, a dashed
+`.match--bye` card, a *No siege* pill), `combatantRow()` suppresses the gold victor styling so a
+walkover never reads as a win, `isPlayable()` refuses them a recording, and `updateStats()` filters
+them out with `isSiege()` so the **Sieges** counter counts sieges and not gates. Keep the byes in
+bracket order in the column — they are laid out with the real matches, not bunched at the top.
+
+**A different field size** only means editing `rounds`: add or drop byes so the opening round has
+a power of two of slots, or add a whole round (thirty-two lords want a Round of 32 in front).
+Point the previous round's `feeds` at the new match ids and column widths, connector lines and
+stat counters adapt on their own — see "Add or remove rounds" below. No CSS to touch.
 
 **The third-place siege** lives as the *second* match of the final round, not a round of its own.
 Order matters: the champion card and the *Watch the final siege* button both read
@@ -91,49 +131,21 @@ Order matters: the champion card and the *Watch the final siege* button both rea
 connector, because its two entrants are the semi-final *losers* and `feeds` only ever moves
 winners.
 
-## The qualifiers
+## No qualifiers
 
-Fought **openly, under real in-game names**. The mask starts at the main event: aliases are drawn
-only once the field is settled, so nothing in the qualifiers needs concealing — and a big, followable
-qualifier field is what draws a crowd in the first place.
+Season I has none. Enlistment was uncapped and eleven banners were pledged — fewer than the
+sixteen the bracket seats — so there was nothing to qualify for: every lord who enlisted rides in
+the main event, and the five byes absorb the shortfall.
 
-They live in the `QUALIFIERS` object, separate from `TOURNAMENT`, and render as a table rather than
-a bracket. That is deliberate: enlistment is uncapped, so the entrant count is unknown, and a table
-copes with any number — odd fields, byes, a lord who withdraws — where a bracket needs a power of
-two and hand-placed gaps.
+That removes the one part of the tournament that was ever fought under real names, so **the mask
+now covers every siege from first to last**, and an in-game name is published in exactly one place:
+beside the alias in the bracket, once **Reveal identities** is pressed.
 
-```js
-const QUALIFIERS = {
-  window:   "Fri 18 – Sun 20 September",
-  format:   "Best of 3",
-  entrants: null,                 // total banners fought; null while unknown
-  matches: [
-    { id:"Q1", date:"18 Sep", status:"completed", winner:0,
-      sides:[ {lord:"Lord_Aldric", score:2}, {lord:"Rook_of_Ely", score:1} ] },
-    { id:"Q8", date:"20 Sep", status:"unfought", winner:null,
-      sides:[ {lord:"HeronBlack",  score:0}, {lord:"Alder_Whitt", score:0} ] }
-  ]
-};
-```
-
-- `window` and `format` render as the section's eyebrow line.
-- Same two states as the bracket — `"completed"` with a `winner`, or `"unfought"`. A decided row
-  shows the score and a gold **Qualified** tag; an open one shows *Not yet fought* / **To come**.
-- `entrants` only changes the summary line: set it and you get *"7 of 23 banners have won through"*;
-  leave it `null` and you get *"7 of 8 sieges decided"*.
-- An empty `matches: []` renders *"The draw is made when enlistment closes."* — that is the state to
-  ship with until the real draw exists.
-- Winners are **not** copied into `TOURNAMENT` automatically. Once the qualifiers are done, write the
-  eight (or sixteen) `lord` names into the bracket by hand and assign the aliases then.
-
-### Why no qualifier recordings
-
-The page says qualifier VODs are held until after the unmasking, and that is a real rule, not
-decoration. A public *result* with a name on it does not compromise the mask — the Hidden Cup model
-has always had a publicly known field and a secret mapping. A public *tape* does: a few minutes of
-watching someone's opening build order, hotkey rhythm and expansion timing is usually enough to pick
-them out of eight aliases. Publish qualifier results as they happen; publish the recordings after
-the crown is settled.
+If a future season overfills — more than sixteen banners — qualifiers come back and want a
+*table*, not a bracket: an unknown, possibly odd entrant count is what a table copes with and a
+bracket does not. The old `QUALIFIERS` object and its `renderQualifiers()` table renderer were
+removed rather than left dormant; recover them from git history (`git log -- index.html`) instead
+of rewriting them.
 
 ## The rulebook section
 
@@ -144,13 +156,14 @@ a two-column `.rules-grid` (`.span-2` makes a card full width):
 
 | Card | What it holds |
 | --- | --- |
-| The series | 16 lords, Bo5 rounds, Bo7 final and third place, and the 150g No Market tiebreaker on HC Fox Mountain |
-| Calling the terms | Coin flip for game one, loser picks afterwards; the four start-gold and three peace-time options |
+| The series | 11 lords, the five byes, Bo3 rounds, Bo5 final and third place, and the optional 150g No Market tiebreaker on HC Fox Mountain |
+| Calling the terms | Wheel spin for game one, loser picks afterwards; the four start-gold options with their ranks and the three peace times |
 | The map pool | The seven HC maps; Fox Mountain is flagged as the tiebreak field |
+| Disconnects & crashes | The four-way drop policy — remake, game loss, contested crash, won-outright crash |
 | Laws of the field | The five conduct rules and what breaking one costs |
 | What you must bring | Game, patch, Discord, Discord streaming, connection |
 | Player checklist | The before-a-series and after-a-series protocols, plus the two absolute nevers |
-| The purse | $55 / $30 / $15 and the payment terms |
+| The purse | $70 / $40 / $20, the two $10 bounties, and the payment terms |
 
 Three rules are deliberately repeated elsewhere rather than left only here, because they change
 what a player does before they ever reach this section: the **assigned alias** and the **media
@@ -168,7 +181,7 @@ connector lines, champion card and stat counters all rebuild from it.
   id: "QF1",                    // unique; referenced by `feeds`
   label: "Siege I",
   date: "26 Sep",
-  format: "Best of 5",
+  format: "Best of 3",
   venue: "Rocky Ford",          // shown in the recording modal
   status: "completed",          // "completed" | "unfought" — see below
   winner: 0,                    // 0 = top, 1 = bottom, null = undecided
@@ -281,8 +294,8 @@ included (Tehran `+3:30`, India `+5:30`, Nepal `+5:45`, Adelaide `+9:30`, Chatha
 add or reshape a realm, keep the `data-lo`/`data-hi` ranges **contiguous** — a gap means that
 visitor gets no pre-selection at all.
 
-To pair for the qualifiers, sort the sheet by this column and match inside a realm first, only
-crossing realms when one has an odd lord left over.
+To schedule a round, sort the sheet by this column and pair inside a realm first, only crossing
+realms when one has an odd lord left over.
 
 **The deadline is stated in Pacific time**, which on 13 September 2026 is **PDT** (`UTC-7`), not
 PST — US summer time runs 8 March to 1 November. Note it lands on the *14th* in UTC, so the page
@@ -686,10 +699,10 @@ the **realm** and the **date**; the name, Discord handle and Steam id are never 
   data all show the form again. This stops accidental double-sends, which is what it is for; it
   is not an identity check, and the sheet remains the source of truth.
 
-Discord handles, Steam IDs and availability notes never render anywhere on the page at all. The
-in-game name renders in exactly two places: **the qualifier table**, openly, as soon as a qualifier
-result is entered; and **beside the alias in the bracket**, once **Reveal identities** is pressed.
-That is what the form promises, so keep it: publish nothing else.
+Discord handles, Steam IDs and availability notes never render anywhere on the page at all. With
+the qualifiers gone the in-game name renders in exactly **one** place: beside the alias in the
+bracket, once **Reveal identities** is pressed. That is what the form promises, so keep it: publish
+nothing else.
 
 ## Sample data — replace before you publish
 
@@ -699,17 +712,20 @@ placeholders, not real Stronghold 2 multiplayer maps or players.
 The seven sample recordings are real Stronghold 2 multiplayer footage from the **TheSettler**
 YouTube channel — they show the player working rather than a placeholder. Several are team games
 (2v2, 3v3) while the cup is 1v1, so swap them for your own VODs once the embargo lifts. The
-Round of 16 and the third-place siege deliberately carry `video: ""`, so nine cards read
+opening sieges and the third-place siege deliberately carry `video: ""`, so four cards read
 *Recording to come* — that is the state the bracket will actually sit in for most of the event.
+The five byes carry `video: ""` too, but read *Straight through* instead: a walkover has no
+recording to wait for.
 
 The **map names are real**: every `venue` comes from the seven-map Hidden Cup pool, so those need
 no replacing. Everything else in the data — lord names, aliases, scores, dates — is invented.
 
 The `preview` flag covers the bracket, but the numbers written into the markup are *not* covered
-by it: the **$100** purse and its $55 / $30 / $15 split, the sixteen-lord field, the gold and
-peace-time options, and the whole "Terms of the Siege" section are hard-coded. Change them there
-when the ruleset changes. (The schedule in "The Rule of the Mask" is real, and the showcase
-bracket's siege dates were set to match its main-event weekends.)
+by it: the **$150** purse and its $70 / $40 / $20 split, the two $10 bounties, the eleven-lord
+field and its five byes, the gold and peace-time options, and the whole "Terms of the Siege" section are hard-coded.
+Change them there when the ruleset changes. (The schedule in "The Rule of the Mask" is real, though
+the page now says in as many words that it is a guideline, and the showcase bracket's siege dates
+were set to match its main-event weekends.)
 
 ## Artwork
 
